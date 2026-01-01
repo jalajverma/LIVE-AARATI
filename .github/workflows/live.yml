@@ -2,8 +2,8 @@ name: Daily YouTube Live
 
 on:
   schedule:
-    - cron: '30 14 * * *'  # यह हर दिन शाम 8:00 बजे (IST) चलेगा
-  workflow_dispatch:      # मैन्युअल बटन
+    - cron: '30 14 * * *'  # रोज़ शाम 8:00 PM IST
+  workflow_dispatch:      # मैन्युअल चलाने के लिए बटन
 
 jobs:
   stream:
@@ -14,7 +14,7 @@ jobs:
 
       - name: Run Live Stream
         run: |
-          ffmpeg -re -i "https://docs.google.com/uc?export=download&id=1IV56RSf6Hzwkyuiv2aQ7lmO5cDFPfxev" \
-          -c:v libx264 -preset veryfast -b:v 3000k -maxrate 3000k -bufsize 6000k \
+          ffmpeg -re -i "https://docs.google.com/uc?export=download&id=1MbfHYBdXAufd1j2Jyg-R9hDL-IE2paoX" \
+          -c:v libx264 -preset veryfast -b:v 2500k -maxrate 2500k -bufsize 5000k \
           -pix_fmt yuv420p -g 50 -c:a aac -b:a 128k -ar 44100 \
           -f flv "rtmp://a.rtmp.youtube.com/live2/${{ secrets.STREAM_KEY }}"
