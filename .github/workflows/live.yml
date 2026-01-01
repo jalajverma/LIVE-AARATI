@@ -2,8 +2,8 @@ name: Daily YouTube Live
 
 on:
   schedule:
-    - cron: '30 14 * * *'  # यह हर दिन शाम 8:00 बजे (IST) अपने आप चलेगा
-  workflow_dispatch:      # इससे आप जब चाहें खुद भी बटन दबाकर लाइव कर सकते हैं
+    - cron: '30 14 * * *'  # यह हर दिन शाम 8:00 बजे (IST) चलेगा
+  workflow_dispatch:      # मैन्युअल बटन
 
 jobs:
   stream:
@@ -12,7 +12,7 @@ jobs:
       - name: Install FFmpeg
         run: sudo apt-get update && sudo apt-get install -y ffmpeg
 
-     - name: Run Live Stream
+      - name: Run Live Stream
         run: |
           ffmpeg -re -i "https://docs.google.com/uc?export=download&id=1IV56RSf6Hzwkyuiv2aQ7lmO5cDFPfxev" \
           -c:v libx264 -preset veryfast -b:v 3000k -maxrate 3000k -bufsize 6000k \
