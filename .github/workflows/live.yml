@@ -12,9 +12,9 @@ jobs:
       - name: Install FFmpeg
         run: sudo apt-get update && sudo apt-get install -y ffmpeg
 
-      - name: Run Live Stream
+     - name: Run Live Stream
         run: |
-          ffmpeg -re -i "https://drive.google.com/uc?id=1IV56RSf6Hzwkyuiv2aQ7lmO5cDFPfxevाँ" \
+          ffmpeg -re -i "https://docs.google.com/uc?export=download&id=1IV56RSf6Hzwkyuiv2aQ7lmO5cDFPfxev" \
           -c:v libx264 -preset veryfast -b:v 3000k -maxrate 3000k -bufsize 6000k \
           -pix_fmt yuv420p -g 50 -c:a aac -b:a 128k -ar 44100 \
           -f flv "rtmp://a.rtmp.youtube.com/live2/${{ secrets.STREAM_KEY }}"
