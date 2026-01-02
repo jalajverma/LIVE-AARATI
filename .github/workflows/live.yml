@@ -12,13 +12,6 @@ jobs:
       - name: Install FFmpeg
         run: sudo apt-get update && sudo apt-get install -y ffmpeg
 
-      - name: Precise Wait for 8:00 PM IST
-        run: |
-          target_time=$(date -d "14:30" +%s)
-          while [ $(date +%s) -lt $target_time ]; do
-            sleep 10
-          done
-
       - name: Run Live Stream
         run: |
           ffmpeg -re -i "https://docs.google.com/uc?export=download&id=1MbfHYBdXAufd1j2Jyg-R9hDL-IE2paoX" \
