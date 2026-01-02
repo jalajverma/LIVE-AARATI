@@ -1,9 +1,9 @@
-name: Daily YouTube Live
+name: Daily YouTube Live Test
 
 on:
   schedule:
-    - cron: '30 14 * * *'  # रोज़ शाम 8:00 PM IST
-  workflow_dispatch:      # मैन्युअल चलाने के लिए बटन
+    - cron: '25 15 * * *'
+  workflow_dispatch:
 
 jobs:
   stream:
@@ -11,6 +11,13 @@ jobs:
     steps:
       - name: Install FFmpeg
         run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - name: Wait until 8:30 PM IST
+        run: |
+          target_time=$(date -d "15:00" +%s)
+          while [ $(date +%s) -lt $target_time ]; do
+            sleep 5
+          done
 
       - name: Run Live Stream
         run: |
