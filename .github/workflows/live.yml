@@ -1,8 +1,8 @@
-name: Daily YouTube Live Test
+name: Daily YouTube Live Perfect
 
 on:
   schedule:
-    - cron: '25 15 * * *'
+    - cron: '00 14 * * *'
   workflow_dispatch:
 
 jobs:
@@ -12,11 +12,11 @@ jobs:
       - name: Install FFmpeg
         run: sudo apt-get update && sudo apt-get install -y ffmpeg
 
-      - name: Wait until 8:30 PM IST
+      - name: Precise Wait for 8:00 PM IST
         run: |
-          target_time=$(date -d "15:00" +%s)
+          target_time=$(date -d "14:30" +%s)
           while [ $(date +%s) -lt $target_time ]; do
-            sleep 5
+            sleep 10
           done
 
       - name: Run Live Stream
