@@ -1,8 +1,6 @@
-name: Daily YouTube Live Perfect
+name: Live Test Simple
 
 on:
-  schedule:
-    - cron: '00 14 * * *'
   workflow_dispatch:
 
 jobs:
