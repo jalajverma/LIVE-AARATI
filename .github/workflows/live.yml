@@ -1,6 +1,9 @@
-name: AARATI Live Stream Fix
+name: 10:15AM Automatic Test
 
 on:
+  schedule:
+    # 10:05 AM IST (04:35 UTC) par GitHub ko jagane ke liye
+    - cron: '35 04 * * *'
   workflow_dispatch:
 
 jobs:
@@ -10,9 +13,18 @@ jobs:
       - name: Install FFmpeg
         run: sudo apt-get update && sudo apt-get install -y ffmpeg
 
-      - name: Run Live Stream
+      - name: Wait until 10:15 AM IST
+        run: |
+          # 10:15 AM IST = 04:45 UTC
+          target_time=$(date -d "04:45" +%s)
+          while [ $(date +%s) -lt $target_time ]; do
+            echo "Waiting for 10:15 AM... Current time: $(date)"
+            sleep 15
+          done
+
+      - name: Start Live Stream
         run: |
           ffmpeg -re -i "https://docs.google.com/uc?export=download&id=1MbfHYBdXAufd1j2Jyg-R9hDL-IE2paoX" \
-          -c:v libx264 -preset ultrafast -tune zerolatency -b:v 1500k -maxrate 1500k -bufsize 3000k \
+          -c:v libx264 -preset ultrafast -tune zerolatency -b:v 4000k -maxrate 4500k -bufsize 9000k \
           -pix_fmt yuv420p -g 60 -c:a aac -b:a 128k -ar 44100 \
           -f flv "rtmp://a.rtmp.youtube.com/live2/${{ secrets.STREAM_KEY }}"
