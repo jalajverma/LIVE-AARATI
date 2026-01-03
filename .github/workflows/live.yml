@@ -1,9 +1,9 @@
-name: 10:15AM Automatic Test
+name: Daily Aarti Live 8PM
 
 on:
   schedule:
-    # 10:05 AM IST (04:35 UTC) par GitHub ko jagane ke liye
-    - cron: '35 04 * * *'
+    # 7:15 PM IST (13:45 UTC) पर GitHub को जगाएगा ताकि 8:00 तक तैयार रहे
+    - cron: '45 13 * * *'
   workflow_dispatch:
 
 jobs:
@@ -13,13 +13,13 @@ jobs:
       - name: Install FFmpeg
         run: sudo apt-get update && sudo apt-get install -y ffmpeg
 
-      - name: Wait until 10:15 AM IST
+      - name: Wait until 8:00 PM IST
         run: |
-          # 10:15 AM IST = 04:45 UTC
-          target_time=$(date -d "04:45" +%s)
+          # 8:00 PM IST = 14:30 UTC
+          target_time=$(date -d "14:30" +%s)
           while [ $(date +%s) -lt $target_time ]; do
-            echo "Waiting for 10:15 AM... Current time: $(date)"
-            sleep 15
+            echo "Waiting for 8:00 PM... Current time: $(date)"
+            sleep 30
           done
 
       - name: Start Live Stream
