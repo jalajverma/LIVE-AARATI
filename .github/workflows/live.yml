@@ -1,6 +1,8 @@
-name: Live Test Simple
+name: Morning 9AM Test Live
 
 on:
+  schedule:
+    - cron: '00 03 * * *'
   workflow_dispatch:
 
 jobs:
@@ -9,6 +11,13 @@ jobs:
     steps:
       - name: Install FFmpeg
         run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - name: Precise Wait for 9:00 AM IST
+        run: |
+          target_time=$(date -d "03:30" +%s)
+          while [ $(date +%s) -lt $target_time ]; do
+            sleep 10
+          done
 
       - name: Run Live Stream
         run: |
